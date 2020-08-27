@@ -3,9 +3,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
+import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,7 +22,8 @@ const Register = ({ setAlert }) => {
     if (password !== password2) setAlert("passwords do not match", "danger");
     //console.log("passwords do not match");
     else {
-      console.log("SUCCESS");
+      //console.log("SUCCESS");
+      register({ name, email, password });
     }
   };
   return (
@@ -36,7 +38,6 @@ const Register = ({ setAlert }) => {
             type='text'
             placeholder='Name'
             name='name'
-            required
             value={name}
             onChange={inputChangeHandler}
           />
@@ -48,7 +49,6 @@ const Register = ({ setAlert }) => {
             type='email'
             placeholder='Email Address'
             name='email'
-            required
           />
           <small className='form-text'>
             This site uses Gravatar so if you want a profile image, use a
@@ -60,7 +60,6 @@ const Register = ({ setAlert }) => {
             type='password'
             placeholder='Password'
             name='password'
-            minLength='6'
             onChange={inputChangeHandler}
             value={password}
           />
@@ -70,7 +69,6 @@ const Register = ({ setAlert }) => {
             type='password'
             placeholder='Confirm Password'
             name='password2'
-            minLength='6'
             onChange={inputChangeHandler}
             value={password2}
           />
@@ -78,7 +76,7 @@ const Register = ({ setAlert }) => {
         <input type='submit' className='btn btn-primary' value='Register' />
       </form>
       <p className='my-1'>
-        Already have an account? <Link to='/login'>Sign I</Link>
+        Already have an account? <Link to='/login'>Sign In</Link>
       </p>
     </Fragment>
   );
@@ -86,6 +84,7 @@ const Register = ({ setAlert }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);
