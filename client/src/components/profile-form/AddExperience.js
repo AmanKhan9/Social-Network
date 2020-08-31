@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addExperience } from "../../actions/profile";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const AddExperience = ({ addExperience, history }) => {
   const [formData, setFormData] = useState({
@@ -84,7 +84,6 @@ const AddExperience = ({ addExperience, history }) => {
               checked={current}
               type='checkbox'
               name='current'
-              value=''
             />{" "}
             Current Job
           </p>
